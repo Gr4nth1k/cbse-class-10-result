@@ -1,1 +1,514 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBSE Class 10 Result 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f4f0;
+      --surface: #ffffff;
+      --surface-2: #f0efe9;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.14);
+      --text-primary: #1a1916;
+      --text-secondary: #6b6a65;
+      --text-hint: #a09f9a;
+      --blue-bg: #eef3ff;
+      --blue-text: #2255cc;
+      --blue-border: rgba(34,85,204,0.2);
+      --green-bg: #edfaf2;
+      --green-text: #1a7a40;
+      --green-border: rgba(26,122,64,0.2);
+      --red-bg: #fff0f0;
+      --red-text: #b82020;
+      --red-border: rgba(184,32,32,0.2);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 2rem;
+    }
+    .header-logo {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      color: var(--blue-text);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-size: 18px; font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+    .header p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 1px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Form */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .field input {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-primary);
+      background: var(--surface);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field input:focus {
+      border-color: var(--blue-text);
+      box-shadow: 0 0 0 3px var(--blue-bg);
+    }
+    .field input::placeholder { color: var(--text-hint); }
+
+    .btn-check {
+      width: 100%;
+      height: 42px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--text-primary);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-check:hover:not(:disabled) { opacity: 0.85; }
+    .btn-check:active:not(:disabled) { transform: scale(0.99); }
+    .btn-check:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* Loader */
+    .loader {
+      display: none;
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .loader::before {
+      content: '';
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid var(--border-strong);
+      border-top-color: var(--text-primary);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error */
+    .error-box {
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-size: 13px;
+      color: var(--red-text);
+      margin-bottom: 1rem;
+    }
+
+    /* Result */
+    .result-card { display: none; }
+
+    .student-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .avatar {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 600;
+      color: var(--blue-text);
+      flex-shrink: 0;
+      font-family: 'DM Mono', monospace;
+    }
+    .student-name {
+      font-size: 17px; font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .student-school {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid;
+    }
+    .badge-pass { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
+    .badge-fail { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
+    .badge-neutral { background: var(--blue-bg); color: var(--blue-text); border-color: var(--blue-border); }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+    .info-item {
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.75rem;
+    }
+    .info-item .lbl {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-hint);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .info-item .val {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .school-item {
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Table section */
+    .table-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .table-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead tr {
+      border-bottom: 1px solid var(--border-strong);
+    }
+    th {
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-hint);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    th.num, td.num { text-align: center; }
+    td {
+      padding: 9px 10px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    .total-row td {
+      background: var(--surface-2);
+      font-weight: 600;
+      border-top: 1px solid var(--border-strong);
+      border-bottom: none;
+    }
+    .code-tag {
+      background: var(--surface-2);
+      color: var(--text-secondary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-hint);
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-logo">CBSE</div>
+    <div>
+      <h1>Class 10 result checker</h1>
+      <p>Secondary school certificate examination · 2026</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="form-row">
+      <div class="field">
+        <label>Roll number</label>
+        <input type="text" id="rollNumber" placeholder="e.g. 1234567" />
+      </div>
+      <div class="field">
+        <label>Date of birth</label>
+        <input type="text" id="dob" placeholder="DD/MM/YYYY" />
+      </div>
+    </div>
+    <!-- Year hidden, hardcoded to 2026 -->
+    <input type="hidden" id="year" value="2026" />
+    <button class="btn-check" id="fetchBtn" onclick="fetchResult()">Check result</button>
+  </div>
+
+  <div class="loader" id="loading">Fetching your result…</div>
+  <div id="errBox"></div>
+
+  <div class="card result-card" id="resultCard">
+    <div class="student-header">
+      <div class="avatar" id="avatarInitials">--</div>
+      <div style="flex:1;">
+        <div class="student-name" id="studentName">—</div>
+        <div class="student-school" id="studentSchoolTop">—</div>
+      </div>
+      <span class="result-badge badge-neutral" id="resultBadge">—</span>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="lbl">Roll number</div>
+        <div class="val" id="iRoll">—</div>
+      </div>
+      <div class="info-item">
+        <div class="lbl">Date of birth</div>
+        <div class="val" id="iDob">—</div>
+      </div>
+      <div class="info-item">
+        <div class="lbl">Mother's name</div>
+        <div class="val" id="iMother">—</div>
+      </div>
+      <div class="info-item">
+        <div class="lbl">Father's name</div>
+        <div class="val" id="iFather">—</div>
+      </div>
+    </div>
+
+    <div class="school-item">
+      <div class="lbl" style="font-size:10px;font-weight:500;color:var(--text-hint);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:3px;">School</div>
+      <div style="font-size:13px;font-weight:500;color:var(--text-primary);" id="iSchool">—</div>
+    </div>
+
+    <div class="table-header">
+      <span class="table-label">Subject-wise marks</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th class="num">Code</th>
+            <th class="num">Theory</th>
+            <th class="num">Practical</th>
+            <th class="num">Total</th>
+          </tr>
+        </thead>
+        <tbody id="marksBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="footer-note">Data sourced from DigiLocker · CBSE official results portal</p>
+</div>
+
+<script>
+  const API_URL = 'https://results.digilocker.gov.in/api/cbse/sscer/results';
+  const PROXY_URL = 'https://api.allorigins.win/raw?url=';
+
+  function initials(name) {
+    if (!name) return '--';
+    return name.trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  }
+
+  async function fetchResult() {
+    const rollNumber = document.getElementById('rollNumber').value.trim();
+    const dob = document.getElementById('dob').value.trim();
+    const year = document.getElementById('year').value;
+    const errBox = document.getElementById('errBox');
+    const loading = document.getElementById('loading');
+    const fetchBtn = document.getElementById('fetchBtn');
+    const resultCard = document.getElementById('resultCard');
+
+    errBox.innerHTML = '';
+    resultCard.style.display = 'none';
+
+    if (!rollNumber || !dob) {
+      errBox.innerHTML = '<div class="error-box">Please fill in both roll number and date of birth.</div>';
+      return;
+    }
+
+    loading.style.display = 'block';
+    fetchBtn.disabled = true;
+
+    try {
+      const formData = new URLSearchParams();
+      formData.append('rroll', rollNumber);
+      formData.append('doctype', 'SSCER');
+      formData.append('dob', dob);
+      formData.append('year', year);
+
+      let response;
+      try {
+        response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': '*/*',
+            'Origin': 'https://umangresults.digilocker.gov.in'
+          },
+          body: formData.toString()
+        });
+      } catch (err) {
+        response = await fetch(PROXY_URL + encodeURIComponent(API_URL), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData.toString()
+        });
+      }
+
+      if (!response.ok) throw new Error('API error');
+      const data = await response.json();
+      const d = data?.data || (data?.CNAME ? data : null);
+      if (!d) throw new Error('Invalid data');
+      displayResult(d);
+    } catch (e) {
+      errBox.innerHTML = '<div class="error-box">Could not fetch result. Please check your roll number and date of birth, then try again.</div>';
+    } finally {
+      loading.style.display = 'none';
+      fetchBtn.disabled = false;
+    }
+  }
+
+  function displayResult(d) {
+    const name = d.CNAME || '';
+    document.getElementById('avatarInitials').textContent = initials(name);
+    document.getElementById('studentName').textContent = name || '—';
+    document.getElementById('studentSchoolTop').textContent = d.SCH_NAME || '—';
+    document.getElementById('iRoll').textContent = d.RROLL || '—';
+    document.getElementById('iDob').textContent = d.DOB_FRMTD || d.DOB || '—';
+    document.getElementById('iMother').textContent = d.MNAME || '—';
+    document.getElementById('iFather').textContent = d.FNAME || '—';
+    document.getElementById('iSchool').textContent = d.SCH_NAME || '—';
+
+    const res = (d.RESULT || d.RES || '').toUpperCase();
+    const badge = document.getElementById('resultBadge');
+    badge.textContent = res || '—';
+    badge.className = 'result-badge ' + (res.includes('PASS') ? 'badge-pass' : res.includes('FAIL') ? 'badge-fail' : 'badge-neutral');
+
+    let rows = '';
+    for (let i = 1; i <= 7; i++) {
+      if (d[`SUB${i}`] && d[`SUB${i}NM`]) {
+        rows += `<tr>
+          <td>${d[`SUB${i}NM`]}</td>
+          <td class="num"><span class="code-tag">${d[`SUB${i}`]}</span></td>
+          <td class="num">${d[`MRK${i}1`] || '—'}</td>
+          <td class="num">${d[`MRK${i}2`] || '—'}</td>
+          <td class="num"><strong>${d[`MRK${i}3`] || '—'}</strong></td>
+        </tr>`;
+      }
+    }
+    rows += `<tr class="total-row">
+      <td colspan="4">Grand total</td>
+      <td class="num">${d.TMRK || '—'}</td>
+    </tr>`;
+
+    document.getElementById('marksBody').innerHTML = rows;
+    document.getElementById('resultCard').style.display = 'block';
+  }
+</script>
+</body>
+</html>
